@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Forms Demo</title>
+    </head>
+    <body>
+        <h2>Feedback Form</h2>
+
+        <form method="post" action="#">
+            <!-- Hidden Inputs -->
+            <input type="hidden" name="recipient" value="youremail@example.com">
+            <input type="hidden" name="subject" value="Feedback Form">
+            <input type="hidden" name="redirect" value="main.html">
+
+            <!-- Visible Fields -->
+            <p>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name">
+            </p>
+
+            <p>
+                <label for="email">E-mail Address:</label><br>
+                <input type="email" id="email" name="email">
+            </p>
+
+            <p>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password">
+            </p>
+
+            <p>
+                <label for="comments">Comments:</label><br>
+                <textarea id="comments" name="comments" rows="4"
+                    cols="40"></textarea>
+            </p>
+
+            <!-- Checkboxes -->
+            <fieldset>
+                <legend>Things you liked:</legend>
+                <label><input type="checkbox" name="liked" value="Design">
+                    Design</label><br>
+                <label><input type="checkbox" name="liked" value="Links">
+                    Links</label><br>
+                <label><input type="checkbox" name="liked" value="Ease of use">
+                    Ease of use</label><br>
+                <label><input type="checkbox" name="liked" value="Images">
+                    Images</label><br>
+                <label><input type="checkbox" name="liked" value="Source code">
+                    Source code</label>
+            </fieldset>
+
+            <!-- Radio Buttons -->
+            <fieldset>
+                <legend>How did you get to our site?</legend>
+                <label><input type="radio" name="source" value="Search engine"
+                        checked> Search engine</label><br>
+                <label><input type="radio" name="source" value="Link">
+                    Link</label><br>
+                <label><input type="radio" name="source" value="Friends">
+                    Friends</label><br>
+                <label><input type="radio" name="source" value="Book">
+                    Book</label><br>
+                <label><input type="radio" name="source" value="Other">
+                    Other</label>
+            </fieldset>
+
+            <!-- Select Menu -->
+            <p>
+                <label for="rating">Rate our site:</label><br>
+                <select id="rating" name="rating">
+                    <option>Awesome</option>
+                    <option>Good</option>
+                    <option>Average</option>
+                    <option>Poor</option>
+                    <option>Awful</option>
+                </select>
+            </p>
+
+            <!-- Buttons -->
+            <p>
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+            </p>
+
+            <a href="index.html">Back to Home</a>
+        </form>
+    </body>
+</html>
