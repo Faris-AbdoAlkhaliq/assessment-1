@@ -27,9 +27,9 @@
         </footer>
 
         <script>
-    // Ask for student count
+    // Ask for student num
     let studentCount = prompt("How many students?");
-    while (studentCount === null || studentCount === "" || isNaN(studentCount) || studentCount <= 0) {
+    while (studentCount === null || studentCount === "" || studentCount <= 0) {
         studentCount = prompt("Enter a valid number of students:");
     }
     studentCount = parseInt(studentCount);

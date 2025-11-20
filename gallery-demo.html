@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gallery Demo</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Gallery Demo</h1>
+        </header>
+
+        <main>
+
+            <!-- Main Image -->
+            <img id="mainImg" src="images/img1.jpg" width="150" height="150">
+
+            <br><br>
+
+            <!-- Buttons -->
+            <button id="disableBtn">Disable Me</button>
+            <button id="sizeBtn">Change Size</button>
+            <button id="imgBtn">Change Image</button>
+
+            <br><br>
+
+            <!-- Thumbnails -->
+            <img src="images/img1.jpg" width="60" class="thumb">
+            <img src="images/img2.jpg" width="60" class="thumb">
+            <img src="images/img3.jpg" width="60" class="thumb">
+
+            <br><br>
+
+            <!-- Dynamic Link -->
+            <select id="linkSelect">
+                <option value="https://google.com">Google</option>
+                <option value="https://youtube.com">youtube</option>
+                <option value="https://github.com">github</option>
+            </select>
+
+            <br><br>
+
+            <a id="myLink" href="https://google.com">Google</a>
+
+            <br><br>
+
+            <!-- Notes -->
+            <button id="addNoteBtn">Add Note</button>
+            <ul id="notesList"></ul>
+
+            <br><br>
+
+            <!-- Reset -->
+            <button id="resetBtn">Reset</button>
+
+        </main>
+
+        <footer>
+            <a href="index.html">Back to Home</a>
+        </footer>
+
+        <script>
+
+    // Disable button
+    document.getElementById("disableBtn").onclick = function () {
+        this.disabled = true;
+    };
+
+    // Toggle size
+    let big = false;
+    document.getElementById("sizeBtn").onclick = function () {
+        let img = document.getElementById("mainImg");
+        if (big) {
+            img.width = 150;
+            img.height = 150;
+        } else {
+            img.width = 250;
+            img.height = 250;
+        }
+        big = !big;
+    };
+
+    // Change image with button
+    document.getElementById("imgBtn").onclick = function () {
+        let img = document.getElementById("mainImg");
+        if (img.src.includes("images/img1.jpg")) {
+            img.src = "images/img2.jpg";
+        } else {
+            img.src = "images/img1.jpg";
+        }
+    };
+
+    // Change image using thumbnails
+    let thumbs = document.getElementsByClassName("thumb");
+    for (let i = 0; i < thumbs.length; i++) {
+        thumbs[i].onclick = function () {
+            document.getElementById("mainImg").src = this.src;
+        };
+    }
+
+    // Change link based on dropdown
+    document.getElementById("linkSelect").onchange = function () {
+        let link = document.getElementById("myLink");
+        link.href = this.value;
+        link.innerHTML = this.options[this.selectedIndex].text;
+    };
+
+    // Add notes
+    document.getElementById("addNoteBtn").onclick = function () {
+        let li = document.createElement("li");
+        li.textContent = "New note added";
+        document.getElementById("notesList").appendChild(li);
+    };
+
+    // Reset button
+    document.getElementById("resetBtn").onclick = function () {
+        let img = document.getElementById("mainImg");
+        img.src = "images/img1.jpg";
+        img.width = 150;
+        img.height = 150;
+
+        document.getElementById("disableBtn").disabled = false;
+
+        document.getElementById("myLink").href = "https://google.com";
+        document.getElementById("myLink").innerHTML = "Google";
+
+        document.getElementById("notesList").innerHTML = "";
+    };
+
+</script>
+
+    </body>
+</html>
