@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Events Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function lightmode() {
+            document.body.style.background = "white";
+            document.body.style.color = "purple";
+        }
+        function darkmode() {
+            document.body.style.background = "black";
+            document.body.style.color = "green";
+        }
+
+        window.onload = function() {
+            document.getElementById(lightmodeBTN).onclick = lightmode;
+        }
+
+        var seconds = 0;
+
+        function startTimer() {
+            seconds ++;
+            document.getElementById("timer").innerHTML = seconds;
+            //chatGPT made me do this part
+            setTimeout(startTimer, 1000);
+        }
+
+        window.onload = function() {
+            startTimer();
+        }
+
+        function showHelp(message) {
+            document.getElementById("helpMessage").innerHTML = message;
+        }
+
+        function clearHelp() {  
+            document.getElementById("helpMessage").innerHTML = "";
+        }
+    </script>
+
+</head>
+<body>
+    <button onclick="lightmode()" id="lightmodeBTN"> light mode</button>
+    <button onclick="darkmode()"> dark mode</button> <br>
+
+    <h6> the time since this page was opened in seconds <h6 id="timer">
+        </h6></h6>
+
+    <form>
+
+        <label>Name:</label><br>
+        <input type="text"
+            onfocus="showHelp('Enter your full name')"
+            onblur="clearHelp()">
+        <br><br>
+
+        <label>Email:</label><br>
+        <input type="email"
+            onfocus="showHelp('Enter a valid email address')"
+            onblur="clearHelp()">
+        <br><br>
+
+        <label>
+            <input type="checkbox"
+                onfocus="showHelp('Check this if you like the site')"
+                onblur="clearHelp()">
+            Do you like the site?
+        </label>
+        <br><br>
+
+        <label>Comments:</label><br>
+        <textarea
+            onfocus="showHelp('Write your comments here')"
+            onblur="clearHelp()"></textarea>
+        <br><br>
+
+        <button type="submit"
+            onfocus="showHelp('Submit the form')"
+            onblur="clearHelp()">
+            Submit
+        </button>
+
+        <button type="reset"
+            onfocus="showHelp('Clear all fields')"
+            onblur="clearHelp()">
+            Reset
+        </button>
+
+    </form>
+
+    <!-- 🔴 Help message shown here -->
+    <p id="helpMessage"
+        style="color:red; margin-top:20px; height:20px;"></p>
+
+</body>

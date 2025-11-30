@@ -4,6 +4,94 @@
         <meta charset="UTF-8">
         <title>Grade Demo</title>
         <link rel="stylesheet" href="style.css">
+
+        <script>
+    window.onload = function() {
+
+    var studentCount = prompt("How many students?");
+    while (studentCount === null || studentCount === "" || studentCount <= 0) {
+        studentCount = prompt("Enter a valid number of students:");
+    }
+    studentCount = parseInt(studentCount);
+    
+    //-----------------------------------------------------------------------------
+    var formHTML = "<form id='gradeForm'>";
+    for (var i = 1; i <= studentCount; i++) {
+        formHTML += `
+        <fieldset>
+            <legend>Student ${i}</legend>
+
+            Name:
+            <input type="text" name="name${i}" required><br><br>
+
+            Grade 1:
+            <input type="number" name="g1_${i}" min="0" max="100" required><br><br>
+
+            Grade 2:
+            <input type="number" name="g2_${i}" min="0" max="100" required><br><br>
+
+            Grade 3:
+            <input type="number" name="g3_${i}" min="0" max="100" required>
+        </fieldset>
+        <br>`;
+    }
+    formHTML += "</form>";
+    //-----------------------------------------------------------------------------
+
+    document.getElementById("formPlace").innerHTML = formHTML;
+    document.getElementById("calcBtn").style.display = "block";
+
+    document.getElementById("calcBtn").onclick = function () {
+
+        var table = `
+        <table border='1' cellpadding='6'>
+            <tr>
+                <th>Name</th>
+                <th>G1</th>
+                <th>G2</th>
+                <th>G3</th>
+                <th>Average</th>
+                <th>Status</th>
+            </tr>`;
+
+        var totalClass = 0;
+
+        for (var i = 1; i <= studentCount; i++) {
+            var name = document.forms["gradeForm"][`name${i}`].value;
+            var g1 = Number(document.forms["gradeForm"][`g1_${i}`].value);
+            var g2 = Number(document.forms["gradeForm"][`g2_${i}`].value);
+            var g3 = Number(document.forms["gradeForm"][`g3_${i}`].value);
+
+            var avg = (g1 + g2 + g3) / 3;
+            totalClass += avg;
+
+            var passFail = avg >= 50 ? "Pass" : "Fail";
+
+            table += `
+            <tr>
+                <td>${name}</td>
+                <td>${g1}</td>
+                <td>${g2}</td>
+                <td>${g3}</td>
+                <td>${avg.toFixed(1)}</td>
+                <td>${passFail}</td>
+            </tr>`;
+        }
+
+        var classAverage = totalClass / studentCount;
+
+        table += `
+        <tr>
+            <td colspan="4"><strong>Class Average</strong></td>
+            <td colspan="2"><strong>${classAverage.toFixed(1)}</strong></td>
+        </tr>
+        </table>`;
+
+        document.getElementById("resultArea").innerHTML = table;
+    };
+};
+</script>
+
     </head>
 
     <body>
@@ -25,94 +113,6 @@
         <footer>
             <a href="index.html">Back to Home</a>
         </footer>
-
-        <script>
-    // Ask for student num
-    let studentCount = prompt("How many students?");
-    while (studentCount === null || studentCount === "" || studentCount <= 0) {
-        studentCount = prompt("Enter a valid number of students:");
-    }
-    studentCount = parseInt(studentCount);
-
-    // Build simple form
-    let formHTML = "<form id='gradeForm'>";
-    for (let i = 1; i <= studentCount; i++) {
-        formHTML += `
-        <fieldset>
-            <legend>Student ${i}</legend>
-
-            Name:
-            <input type="text" name="name${i}" required><br><br>
-
-            Grade 1:
-            <input type="number" name="g1_${i}" min="0" max="100" required><br><br>
-
-            Grade 2:
-            <input type="number" name="g2_${i}" min="0" max="100" required><br><br>
-
-            Grade 3:
-            <input type="number" name="g3_${i}" min="0" max="100" required>
-        </fieldset>
-        <br>`;
-    }
-    formHTML += "</form>";
-
-    document.getElementById("formPlace").innerHTML = formHTML;
-
-    // Show button
-    document.getElementById("calcBtn").style.display = "block";
-
-    // Compute results on click
-    document.getElementById("calcBtn").onclick = function () {
-
-        let table = `
-        <table border='1' cellpadding='6'>
-            <tr>
-                <th>Name</th>
-                <th>G1</th>
-                <th>G2</th>
-                <th>G3</th>
-                <th>Average</th>
-                <th>Status</th>
-            </tr>`;
-
-        let totalClass = 0;
-
-        for (let i = 1; i <= studentCount; i++) {
-
-            let name = document.forms["gradeForm"][`name${i}`].value;
-            let g1 = Number(document.forms["gradeForm"][`g1_${i}`].value);
-            let g2 = Number(document.forms["gradeForm"][`g2_${i}`].value);
-            let g3 = Number(document.forms["gradeForm"][`g3_${i}`].value);
-
-            let avg = (g1 + g2 + g3) / 3;
-            totalClass += avg;
-
-            let passFail = (avg >= 50) ? "Pass" : "Fail";
-
-            table += `
-            <tr>
-                <td>${name}</td>
-                <td>${g1}</td>
-                <td>${g2}</td>
-                <td>${g3}</td>
-                <td>${avg.toFixed(1)}</td>
-                <td>${passFail}</td>
-            </tr>`;
-        }
-
-        let classAverage = totalClass / studentCount;
-
-        table += `
-        <tr>
-            <td colspan="4"><strong>Class Average</strong></td>
-            <td colspan="2"><strong>${classAverage.toFixed(1)}</strong></td>
-        </tr>
-        </table>`;
-
-        document.getElementById("resultArea").innerHTML = table;
-    };
-</script>
 
     </body>
 </html>
