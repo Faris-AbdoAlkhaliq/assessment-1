@@ -5,6 +5,26 @@
         <title>Gallery Demo</title>
         <link rel="stylesheet" href="style.css">
         <script>
+
+        // Toggle size    
+        function toggleSize() {
+        var img = document.getElementById("mainImg");
+
+        if (img.width >= "150"){
+        img.width = "100";
+        img.height = "100";
+        }
+        else{ 
+            img.width = "150";
+            img.height = "150";
+        }
+        }
+
+    // Change image with button
+    function changeImage() {
+    var img = document.getElementById("mainImg");
+    img.src = "images/img2.jpg";
+    };        
     window.onload = function() {
 
     
@@ -13,29 +33,10 @@
         this.disabled = true;
     };
 
-    // Toggle size
-    var big = false;
-    document.getElementById("sizeBtn").onclick = function () {
-        var img = document.getElementById("mainImg");
-        if (big) {
-            img.width = 150;
-            img.height = 150;
-        } else {
-            img.width = 250;
-            img.height = 250;
-        }
-        big = !big;
-    };
+    
 
-    // Change image with button
-    document.getElementById("imgBtn").onclick = function () {
-        var img = document.getElementById("mainImg");
-        if (img.src.includes("images/img1.jpg")) {
-            img.src = "images/img2.jpg";
-        } else {
-            img.src = "images/img1.jpg";
-        }
-    };
+
+
 
     // Change image using thumbnails
     var thumbs = document.getElementsByClassName("thumb");
@@ -93,14 +94,15 @@
 
             <!-- Buttons -->
             <button id="disableBtn">Disable Me</button>
-            <button id="sizeBtn">Change Size</button>
-            <button id="imgBtn">Change Image</button>
+            <button onclick="toggleSize()">Change Size</button>
+            <button onclick="changeImage()">Change Image</button>
 
             <br><br>
 
             <!-- Thumbnails -->
             <img src="images/img1.jpg" width="60" class="thumb">
-            <img src="images/img2.jpg" width="60" class="thumb">
+            <img src="images/img2.jpg" id="sizeBtn" width="60" height="60"
+                class="thumb">
             <img src="images/img3.jpg" width="60" class="thumb">
 
             <br><br>
